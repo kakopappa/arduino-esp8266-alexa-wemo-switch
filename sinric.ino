@@ -9,7 +9,7 @@ boolean connectUDP();
 void startHttpServer();
 
 const char* ssid = "Aruna";
-const char* password = "80492306";
+const char* password = "****";
 
 unsigned int localPort = 1900;      // local port to listen on
 
