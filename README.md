@@ -9,9 +9,12 @@ Parts you need
 
 2.  WeMos Relay ($1.90) http://www.aliexpress.com/store/product/Relay-Shield-for-WeMos-D1-mini-button/1331105_32596395175.html
 
+Relay is connected to D1
+
 To controlled this switch via Amazon Alexa.
 
-1. Just download this code and flash it va Arduino IDE. 
-2. Scan for new devices in Alexa
-3. Say "turn on" senric
+1. Just download 
+2. Change the WI-FI settings. 
+3. Scan for new devices in Alexa
+4. Say "turn on" sinric
 
