@@ -13,8 +13,9 @@ Relay is connected to D1
 
 To controlled this switch via Amazon Alexa.
 
-1. Just download 
+1. Download the code
 2. Change the WI-FI settings. 
-3. Scan for new devices in Alexa
-4. Say "turn on" sinric
+3. Flash 
+4. Scan for new devices in Alexa
+5. Say "turn on" sinric
 
