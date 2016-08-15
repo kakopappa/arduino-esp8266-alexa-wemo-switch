@@ -7,9 +7,11 @@ void prepareIds();
 boolean connectWifi();
 boolean connectUDP();
 void startHttpServer();
+void turnOnRelay();
+void turnOffRelay();
 
 const char* ssid = "Aruna";
-const char* password = "****";
+const char* password = "********";
 
 unsigned int localPort = 1900;      // local port to listen on
 
@@ -26,10 +28,18 @@ char packetBuffer[UDP_TX_PACKET_MAX_SIZE]; //buffer to hold incoming packet,
 
 String serial;
 String persistent_uuid;
-      
+String device_name;
+
+const int relayPin = D1;
+
+boolean cannotConnectToWifi = false;
+
 void setup() {
   Serial.begin(115200);
 
+  // Setup Relay
+  pinMode(relayPin, OUTPUT);
+  
   prepareIds();
   
   // Initialise wifi connection
@@ -50,6 +60,7 @@ void loop() {
 
   HTTP.handleClient();
   delay(1);
+  
   
   // if there's data available, read a packet
   // check if the WiFi and UDP connections were successful
@@ -90,11 +101,13 @@ void loop() {
                 Serial.println("Responding to search request ...");
                 respondToSearch();
             }
-        } 
+        }
       }
         
       delay(10);
     }
+  } else {
+      // Turn on/off to indicate cannot connect ..      
   }
 }
 
@@ -108,6 +121,7 @@ void prepareIds() {
 
   serial = String(uuid);
   persistent_uuid = "Socket-1_0-" + serial;
+  device_name = "box";
 }
 
 void respondToSearch() {
@@ -160,10 +174,12 @@ void startHttpServer() {
  
       if(request.indexOf("<BinaryState>1</BinaryState>") > 0) {
           Serial.println("Got Turn on request");
+          turnOnRelay();
       }
 
       if(request.indexOf("<BinaryState>0</BinaryState>") > 0) {
           Serial.println("Got Turn off request");
+          turnOffRelay();
       }
       
       HTTP.send(200, "text/plain", "");
@@ -213,7 +229,7 @@ void startHttpServer() {
             "<root>"
              "<device>"
                 "<deviceType>urn:Belkin:device:controllee:1</deviceType>"
-                "<friendlyName>sinric</friendlyName>"
+                "<friendlyName>"+ device_name +"</friendlyName>"
                 "<manufacturer>Belkin International Inc.</manufacturer>"
                 "<modelName>Emulated Socket</modelName>"
                 "<modelNumber>3.1415</modelNumber>"
@@ -299,4 +315,10 @@ boolean connectUDP(){
   return state;
 }
 
+void turnOnRelay() {
+ digitalWrite(relayPin, HIGH); // turn on relay with voltage HIGH 
+}
 
+void turnOffRelay() {
+  digitalWrite(relayPin, LOW);  // turn off relay with voltage LOW
+}
