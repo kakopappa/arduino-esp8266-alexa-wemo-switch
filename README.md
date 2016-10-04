@@ -17,5 +17,5 @@ To controlled this switch via Amazon Alexa.
 2. Change the WI-FI settings. 
 3. Flash 
 4. Scan for new devices in Alexa
-5. Say "turn on" sinric
+5. Say "turn on" box
 
