@@ -9,7 +9,7 @@ Parts you need
 
 2.  WeMos Relay ($1.90) http://www.aliexpress.com/store/product/Relay-Shield-for-WeMos-D1-mini-button/1331105_32596395175.html
 
-3. (AC-DC HLK-PM01 module voltage 220V to 5V) to convert 220V to 5V for D1-mini
+3. AC-DC HLK-PM01 module voltage 220V to 5V (Optinal) to convert 220V to 5V for D1-mini
 
 Relay is connected to D1
 
