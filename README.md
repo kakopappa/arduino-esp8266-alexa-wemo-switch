@@ -1,7 +1,7 @@
 Box
 =======
 
-I wanted to build a cheap swich that can be controlled by Amazon Alexa. 
+I wanted to build a cheap swich that can be controlled by Amazon Alexa by emulating a delkin device. 
 
 Parts you need
 
