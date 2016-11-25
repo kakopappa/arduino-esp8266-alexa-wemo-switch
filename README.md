@@ -21,3 +21,4 @@ To controlled this switch via Amazon Alexa.
 4. Scan for new devices in Alexa
 5. Say "turn on" box
 
+Works with sonoff - Thanks @joeman2116
