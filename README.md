@@ -21,4 +21,15 @@ To controlled this switch via Amazon Alexa.
 4. Scan for new devices in Alexa
 5. Say "turn on" box
 
-Works with sonoff - Thanks @joeman2116
+Or Sonoff - Thanks @joeman2116 (https://github.com/kakopappa/arduino-esp8266-alexa-wemo-switch/issues/6)
+
+Use a ftdi 3.3v as the programmer.
+I tried type as a generic 1meg flash but got reboot problems.
+So I used the nodemcu.9 choice.
+
+Change the ssid
+Change password
+Change device name to (your choice)
+
+Pins
+I use d6 for the relay and d7 for the led.(optional)
