@@ -40,3 +40,16 @@ I use d6 for the relay and d7 for the led.(optional)
 
 If you want to control more than 1 switch checkout my other project
 https://github.com/kakopappa/arduino-esp8266-alexa-multiple-wemo-switch
+
+#Articles about the MaterialDrawer
+* [java-help.ru](http://java-help.ru/material-navigationdrawer/)
+
+
+#Credits
+
+- makermusings - [GitHub](https://github.com/makermusings/fauxmo)
+
+#Developed By
+
+* Aruna Tennakoon
+ * [paypal.me/arunat](http://paypal.me/arunat)
