@@ -41,8 +41,8 @@ I use d6 for the relay and d7 for the led.(optional)
 If you want to control more than 1 switch checkout my other project
 https://github.com/kakopappa/arduino-esp8266-alexa-multiple-wemo-switch
 
-#Articles about the MaterialDrawer
-* [java-help.ru](http://java-help.ru/material-navigationdrawer/)
+#Articles about the Wemos switch
+* [monkeytypewritr](https://medium.com/@monkeytypewritr/amazon-echo-esp8266-iot-a42076daafa5#.oc4od1xa0)
 
 
 #Credits
