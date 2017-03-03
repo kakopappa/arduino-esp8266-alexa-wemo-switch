@@ -55,3 +55,4 @@ https://github.com/kakopappa/arduino-esp8266-alexa-multiple-wemo-switch
  * [paypal.me/arunat](http://paypal.me/arunat)
  * 3 beers from [dougstrickland](https://github.com/dougstrickland) - Thanks
  * 2 beers from Michael Berna
+ * 1 beer Keg from Phillip Ryals
