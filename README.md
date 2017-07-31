@@ -53,7 +53,7 @@ https://github.com/kakopappa/arduino-esp8266-alexa-multiple-wemo-switch
 
 * Aruna Tennakoon
  * [paypal.me/arunat](http://paypal.me/arunat)
- * Bitcon 1JnmhzTbW9MRb7FK7UReoWdUZ18MDn6aNv
+ * Bitcon ```1JnmhzTbW9MRb7FK7UReoWdUZ18MDn6aNv```
  * 3 beers from [dougstrickland](https://github.com/dougstrickland) - Thanks
  * 2 beers from Michael Berna
  * 1 beer Keg from Phillip Ryals
