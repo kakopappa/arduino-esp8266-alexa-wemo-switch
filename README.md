@@ -44,6 +44,8 @@ https://github.com/kakopappa/arduino-esp8266-alexa-multiple-wemo-switch
 ##Articles about the Wemos switch
 * [monkeytypewritr](https://medium.com/@monkeytypewritr/amazon-echo-esp8266-iot-a42076daafa5#.oc4od1xa0)
 
+##Do you want to turn on / off your TV, AirCon (AC) using Amazon Alexa? Checkout my latest project
+https://irdevkit.com/
 
 ##Credits
 
