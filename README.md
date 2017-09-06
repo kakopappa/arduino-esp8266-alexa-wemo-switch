@@ -23,7 +23,7 @@ To controlled this switch via Amazon Alexa.
 4. Scan for new devices in Alexa
 5. Say "turn on" box
 
-#Do you want to turn on / off your TV, AirCon (AC) using Amazon Alexa? Checkout my latest project#
+## Do you want to turn on / off your TV, AirCon (AC) using Amazon Alexa? Checkout my latest project
 **https://irdevkit.com/**
 
 
