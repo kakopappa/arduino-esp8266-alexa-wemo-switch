@@ -23,6 +23,10 @@ To controlled this switch via Amazon Alexa.
 4. Scan for new devices in Alexa
 5. Say "turn on" box
 
+**Do you want to turn on / off your TV, AirCon (AC) using Amazon Alexa? Checkout my latest project**
+https://irdevkit.com/
+
+
 ##Using Sonoff##
 
 Sonoff - Thanks @joeman2116 (https://github.com/kakopappa/arduino-esp8266-alexa-wemo-switch/issues/6)
@@ -44,8 +48,7 @@ https://github.com/kakopappa/arduino-esp8266-alexa-multiple-wemo-switch
 ##Articles about the Wemos switch
 * [monkeytypewritr](https://medium.com/@monkeytypewritr/amazon-echo-esp8266-iot-a42076daafa5#.oc4od1xa0)
 
-##Do you want to turn on / off your TV, AirCon (AC) using Amazon Alexa? Checkout my latest project
-https://irdevkit.com/
+ 
 
 ##Credits
 
