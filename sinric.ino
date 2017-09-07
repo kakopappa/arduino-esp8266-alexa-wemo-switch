@@ -23,6 +23,7 @@ unsigned int portMulti = 1900;      // local port to listen on
 ESP8266WebServer HTTP(80);
  
 boolean wifiConnected = false;
+boolean switchOn = false;
 
 char packetBuffer[UDP_TX_PACKET_MAX_SIZE]; //buffer to hold incoming packet,
 
@@ -30,7 +31,7 @@ String serial;
 String persistent_uuid;
 String device_name;
 
-const int relayPin = D1;
+const int relayPin = LED_BUILTIN;
 
 boolean cannotConnectToWifi = false;
 
@@ -161,6 +162,28 @@ void startHttpServer() {
       HTTP.send(200, "text/plain", "Hello World!");
     });
 
+    HTTP.on("/on.html", HTTP_GET, [](){
+        Serial.println("Got Turn on request");
+        HTTP.send(200, "text/plain", "turned on");
+        turnOnRelay();
+      });
+
+    HTTP.on("/off.html", HTTP_GET, [](){
+       Serial.println("Got Turn off request");
+       HTTP.send(200, "text/plain", "turned off");
+       turnOffRelay();
+      });
+
+     HTTP.on("/status.html", HTTP_GET, [](){
+       Serial.println("Got status request");
+
+        String statrespone = "0"; 
+       if (switchOn) {
+         statrespone = "1"; 
+       }
+       HTTP.send(200, "text/plain", statrespone);
+     
+      });
     HTTP.on("/upnp/control/basicevent1", HTTP_POST, []() {
       Serial.println("########## Responding to  /upnp/control/basicevent1 ... ##########");      
 
@@ -317,8 +340,10 @@ boolean connectUDP(){
 
 void turnOnRelay() {
  digitalWrite(relayPin, HIGH); // turn on relay with voltage HIGH 
+ switchOn = true;
 }
 
 void turnOffRelay() {
   digitalWrite(relayPin, LOW);  // turn off relay with voltage LOW
+  switchOn = false;
 }
