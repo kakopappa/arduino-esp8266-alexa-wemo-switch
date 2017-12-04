@@ -9,29 +9,24 @@ boolean connectUDP();
 void startHttpServer();
 void turnOnRelay();
 void turnOffRelay();
+void sendRelayState();
 
-const char* ssid = "Aruna";
-const char* password = "********";
-
-unsigned int localPort = 1900;      // local port to listen on
+const char* ssid = "************";  // CHANGE: Wifi name
+const char* password = "********";  // CHANGE: Wifi password 
+String friendlyName = "tv";        // CHANGE: Alexa device name
+const int relayPin = 5;  // D1 pin. More info: https://github.com/esp8266/Arduino/blob/master/variants/d1_mini/pins_arduino.h#L49-L61
 
 WiFiUDP UDP;
-boolean udpConnected = false;
 IPAddress ipMulti(239, 255, 255, 250);
-unsigned int portMulti = 1900;      // local port to listen on
-
 ESP8266WebServer HTTP(80);
- 
+boolean udpConnected = false;
+unsigned int portMulti = 1900;      // local port to listen on
+unsigned int localPort = 1900;      // local port to listen on
 boolean wifiConnected = false;
-
+boolean relayState = false;
 char packetBuffer[UDP_TX_PACKET_MAX_SIZE]; //buffer to hold incoming packet,
-
 String serial;
 String persistent_uuid;
-String device_name;
-
-const int relayPin = D1;
-
 boolean cannotConnectToWifi = false;
 
 void setup() {
@@ -47,6 +42,7 @@ void setup() {
 
   // only proceed if wifi connection successful
   if(wifiConnected){
+    Serial.println("Ask Alexa to discover devices");
     udpConnected = connectUDP();
     
     if (udpConnected){
@@ -70,10 +66,10 @@ void loop() {
       int packetSize = UDP.parsePacket();
       
       if(packetSize) {
-        Serial.println("");
-        Serial.print("Received packet of size ");
-        Serial.println(packetSize);
-        Serial.print("From ");
+        //Serial.println("");
+        //Serial.print("Received packet of size ");
+        //Serial.println(packetSize);
+        //Serial.print("From ");
         IPAddress remote = UDP.remoteIP();
         
         for (int i =0; i < 4; i++) {
@@ -107,7 +103,7 @@ void loop() {
       delay(10);
     }
   } else {
-      // Turn on/off to indicate cannot connect ..      
+      Serial.println("Cannot connect to Wifi");
   }
 }
 
@@ -121,7 +117,6 @@ void prepareIds() {
 
   serial = String(uuid);
   persistent_uuid = "Socket-1_0-" + serial;
-  device_name = "box";
 }
 
 void respondToSearch() {
@@ -172,48 +167,69 @@ void startHttpServer() {
       Serial.print("request:");
       Serial.println(request);
  
-      if(request.indexOf("<BinaryState>1</BinaryState>") > 0) {
-          Serial.println("Got Turn on request");
-          turnOnRelay();
+      if(request.indexOf("SetBinaryState") >= 0) {
+        if(request.indexOf("<BinaryState>1</BinaryState>") >= 0) {
+            Serial.println("Got Turn on request");
+            turnOnRelay();
+        }
+  
+        if(request.indexOf("<BinaryState>0</BinaryState>") >= 0) {
+            Serial.println("Got Turn off request");
+            turnOffRelay();
+        }
       }
 
-      if(request.indexOf("<BinaryState>0</BinaryState>") > 0) {
-          Serial.println("Got Turn off request");
-          turnOffRelay();
+      if(request.indexOf("GetBinaryState") >= 0) {
+        Serial.println("Got binary state request");
+        sendRelayState();
       }
+      
       
       HTTP.send(200, "text/plain", "");
     });
 
     HTTP.on("/eventservice.xml", HTTP_GET, [](){
       Serial.println(" ########## Responding to eventservice.xml ... ########\n");
-      String eventservice_xml = "<?scpd xmlns=\"urn:Belkin:service-1-0\"?>"
-            "<actionList>"
-              "<action>"
-                "<name>SetBinaryState</name>"
-                "<argumentList>"
-                  "<argument>"
-                    "<retval/>"
-                    "<name>BinaryState</name>"
-                    "<relatedStateVariable>BinaryState</relatedStateVariable>"
-                    "<direction>in</direction>"
-                  "</argument>"
-                "</argumentList>"
-                 "<serviceStateTable>"
-                  "<stateVariable sendEvents=\"yes\">"
-                    "<name>BinaryState</name>"
-                    "<dataType>Boolean</dataType>"
-                    "<defaultValue>0</defaultValue>"
-                  "</stateVariable>"
-                  "<stateVariable sendEvents=\"yes\">"
-                    "<name>level</name>"
-                    "<dataType>string</dataType>"
-                    "<defaultValue>0</defaultValue>"
-                  "</stateVariable>"
-                "</serviceStateTable>"
-              "</action>"
-            "</scpd>\r\n"
-            "\r\n";
+      
+      String eventservice_xml = "<scpd xmlns=\"urn:Belkin:service-1-0\">"
+        "<actionList>"
+          "<action>"
+            "<name>SetBinaryState</name>"
+            "<argumentList>"
+              "<argument>"
+                "<retval/>"
+                "<name>BinaryState</name>"
+                "<relatedStateVariable>BinaryState</relatedStateVariable>"
+                "<direction>in</direction>"
+                "</argument>"
+            "</argumentList>"
+          "</action>"
+          "<action>"
+            "<name>GetBinaryState</name>"
+            "<argumentList>"
+              "<argument>"
+                "<retval/>"
+                "<name>BinaryState</name>"
+                "<relatedStateVariable>BinaryState</relatedStateVariable>"
+                "<direction>out</direction>"
+                "</argument>"
+            "</argumentList>"
+          "</action>"
+      "</actionList>"
+        "<serviceStateTable>"
+          "<stateVariable sendEvents=\"yes\">"
+            "<name>BinaryState</name>"
+            "<dataType>Boolean</dataType>"
+            "<defaultValue>0</defaultValue>"
+           "</stateVariable>"
+           "<stateVariable sendEvents=\"yes\">"
+              "<name>level</name>"
+              "<dataType>string</dataType>"
+              "<defaultValue>0</defaultValue>"
+           "</stateVariable>"
+        "</serviceStateTable>"
+        "</scpd>\r\n"
+        "\r\n";
             
       HTTP.send(200, "text/plain", eventservice_xml.c_str());
     });
@@ -229,10 +245,11 @@ void startHttpServer() {
             "<root>"
              "<device>"
                 "<deviceType>urn:Belkin:device:controllee:1</deviceType>"
-                "<friendlyName>"+ device_name +"</friendlyName>"
+                "<friendlyName>"+ friendlyName +"</friendlyName>"
                 "<manufacturer>Belkin International Inc.</manufacturer>"
-                "<modelName>Emulated Socket</modelName>"
+                "<modelName>Socket</modelName>"
                 "<modelNumber>3.1415</modelNumber>"
+                "<modelDescription>Belkin Plugin Socket 1.0</modelDescription>\r\n"
                 "<UDN>uuid:"+ persistent_uuid +"</UDN>"
                 "<serialNumber>221517K0101769</serialNumber>"
                 "<binaryState>0</binaryState>"
@@ -317,8 +334,50 @@ boolean connectUDP(){
 
 void turnOnRelay() {
  digitalWrite(relayPin, HIGH); // turn on relay with voltage HIGH 
+ relayState = true;
+
+  String body = 
+      "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><s:Body>\r\n"
+      "<u:SetBinaryStateResponse xmlns:u=\"urn:Belkin:service:basicevent:1\">\r\n"
+      "<BinaryState>1</BinaryState>\r\n"
+      "</u:SetBinaryStateResponse>\r\n"
+      "</s:Body> </s:Envelope>";
+
+  HTTP.send(200, "text/xml", body.c_str());
+        
+  Serial.print("Sending :");
+  Serial.println(body);
 }
 
 void turnOffRelay() {
   digitalWrite(relayPin, LOW);  // turn off relay with voltage LOW
+  relayState = false;
+
+  String body = 
+      "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><s:Body>\r\n"
+      "<u:SetBinaryStateResponse xmlns:u=\"urn:Belkin:service:basicevent:1\">\r\n"
+      "<BinaryState>0</BinaryState>\r\n"
+      "</u:SetBinaryStateResponse>\r\n"
+      "</s:Body> </s:Envelope>";
+
+  HTTP.send(200, "text/xml", body.c_str());
+        
+  Serial.print("Sending :");
+  Serial.println(body);
+}
+
+void sendRelayState() {
+  
+  String body = 
+      "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><s:Body>\r\n"
+      "<u:GetBinaryStateResponse xmlns:u=\"urn:Belkin:service:basicevent:1\">\r\n"
+      "<BinaryState>";
+      
+  body += (relayState ? "1" : "0");
+  
+  body += "</BinaryState>\r\n"
+      "</u:GetBinaryStateResponse>\r\n"
+      "</s:Body> </s:Envelope>\r\n";
+ 
+   HTTP.send(200, "text/xml", body.c_str());
 }
