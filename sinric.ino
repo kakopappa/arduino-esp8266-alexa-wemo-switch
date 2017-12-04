@@ -183,8 +183,7 @@ void startHttpServer() {
         Serial.println("Got binary state request");
         sendRelayState();
       }
-      
-      
+            
       HTTP.send(200, "text/plain", "");
     });
 
@@ -271,12 +270,34 @@ void startHttpServer() {
         Serial.print("Sending :");
         Serial.println(setup_xml);
     });
+
+    // openHAB support
+    HTTP.on("/on.html", HTTP_GET, [](){
+         Serial.println("Got Turn on request");
+         HTTP.send(200, "text/plain", "turned on");
+         turnOnRelay();
+       });
+ 
+     HTTP.on("/off.html", HTTP_GET, [](){
+        Serial.println("Got Turn off request");
+        HTTP.send(200, "text/plain", "turned off");
+        turnOffRelay();
+       });
+ 
+      HTTP.on("/status.html", HTTP_GET, [](){
+        Serial.println("Got status request");
+ 
+        String statrespone = "0"; 
+        if (relayState) {
+          statrespone = "1"; 
+        }
+        HTTP.send(200, "text/plain", statrespone);
+      
+    });
     
     HTTP.begin();  
     Serial.println("HTTP Server started ..");
 }
-
-
       
 // connect to wifi – returns true if successful or false if not
 boolean connectWifi(){
