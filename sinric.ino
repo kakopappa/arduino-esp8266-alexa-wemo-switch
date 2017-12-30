@@ -91,8 +91,9 @@ void loop() {
         String request = packetBuffer;
         //Serial.println("Request:");
         //Serial.println(request);
-         
-        if(request.indexOf("M-SEARCH") > 0) {
+        
+        // Issue https://github.com/kakopappa/arduino-esp8266-alexa-wemo-switch/issues/24 fix
+        if(request.indexOf("M-SEARCH") >= 0) {
             // Issue https://github.com/kakopappa/arduino-esp8266-alexa-multiple-wemo-switch/issues/22 fix
             //if(request.indexOf("urn:Belkin:device:**") > 0) {
              if((request.indexOf("urn:Belkin:device:**") > 0) || (request.indexOf("ssdp:all") > 0) || (request.indexOf("upnp:rootdevice") > 0)) {
