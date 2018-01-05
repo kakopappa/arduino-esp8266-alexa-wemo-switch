@@ -25,6 +25,9 @@ To controlled this switch via Amazon Alexa.
 
 ## Do you want to turn on / off your TV, AirCon (AC) using Amazon Alexa? Checkout my latest project https://irdevkit.com/
 
+### If you have issues discovering please consider using sinric smart home skill. 
+https://github.com/kakopappa/arduino-esp8266-alexa-wemo-switch/issues/7#issuecomment-355533848
+* [sinric.com](https://sinric.com) 
 
 ##Using Sonoff##
 
