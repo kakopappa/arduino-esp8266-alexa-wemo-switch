@@ -165,7 +165,9 @@ void respondToSearch() {
     UDP.beginPacket(UDP.remoteIP(), UDP.remotePort());
     UDP.write(response.c_str());
     UDP.endPacket();                    
-
+     /* add yield to fix UDP sending response. For more informations : https://www.tabsoverspaces.com/233359-udp-packets-not-sent-from-esp-8266-solved */
+     yield(); 
+  
      Serial.println("Response sent !");
 }
 
