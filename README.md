@@ -5,6 +5,10 @@ I just wanted to build a cheap switch that can be controlled by Amazon Alexa by 
 
 You can do this using WeMos D1-mini + Relay or use SonOff
 
+### If you have issues discovering please consider using Sinric Pro smart home skill. 
+https://github.com/kakopappa/arduino-esp8266-alexa-wemo-switch/issues/7#issuecomment-355533848
+* [sinric.pro](https://sinric.pro) 
+
 ### Using WeMos D1-mini + Relay  
 
 1. WeMos D1-mini ($4.00)  http://www.aliexpress.com/store/product/D1-mini-Mini-NodeMcu-4M-bytes-Lua-WIFI-Internet-of-Things-development-board-based-ESP8266/1331105_32529101036.html
@@ -23,11 +27,9 @@ To controlled this switch via Amazon Alexa.
 4. Scan for new devices in Alexa
 5. Say "turn on" box
 
-## Do you want to turn on / off your TV, AirCon (AC) using Amazon Alexa? Checkout my latest project https://irdevkit.com/
+### Do you want to turn on / off your TV, AirCon (AC) using Amazon Alexa? Checkout my latest project https://irdevkit.com/
 
-### If you have issues discovering please consider using sinric smart home skill. 
-https://github.com/kakopappa/arduino-esp8266-alexa-wemo-switch/issues/7#issuecomment-355533848
-* [sinric.com](https://sinric.com) 
+
 
 ##Using Sonoff##
 
