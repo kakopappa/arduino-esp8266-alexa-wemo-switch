@@ -5,11 +5,10 @@ I just wanted to build a cheap switch that can be controlled by Amazon Alexa by 
 
 You can do this using WeMos D1-mini + Relay or use SonOff
 
-### If you have issues discovering please consider using Sinric Pro smart home skill. 
-https://github.com/kakopappa/arduino-esp8266-alexa-wemo-switch/issues/7#issuecomment-355533848
+### If you have [issues](https://github.com/kakopappa/arduino-esp8266-alexa-wemo-switch/issues/7#issuecomment-355533848) discovering please consider using Sinric Pro smart home skill. 
 * [sinric.pro](https://sinric.pro) 
 
-### Using WeMos D1-mini + Relay  
+#### Using WeMos D1-mini + Relay  
 
 1. WeMos D1-mini ($4.00)  http://www.aliexpress.com/store/product/D1-mini-Mini-NodeMcu-4M-bytes-Lua-WIFI-Internet-of-Things-development-board-based-ESP8266/1331105_32529101036.html
 
@@ -27,7 +26,7 @@ To controlled this switch via Amazon Alexa.
 4. Scan for new devices in Alexa
 5. Say "turn on" box
 
-### Do you want to turn on / off your TV, AirCon (AC) using Amazon Alexa? Checkout my latest project https://irdevkit.com/
+#### Do you want to turn on / off your TV, AirCon (AC) using Amazon Alexa? Checkout my latest project https://irdevkit.com/
 
 
 
@@ -49,16 +48,16 @@ I use d6 for the relay and d7 for the led.(optional)
 If you want to control more than 1 switch checkout my other project
 https://github.com/kakopappa/arduino-esp8266-alexa-multiple-wemo-switch
 
-### Articles about the Wemos switch
+#### Articles about the Wemos switch
 * [monkeytypewritr](https://medium.com/@monkeytypewritr/amazon-echo-esp8266-iot-a42076daafa5#.oc4od1xa0)
 
  
 
-### Credits
+#### Credits
 
 - makermusings - [GitHub](https://github.com/makermusings/fauxmo)
 
-### Developed By
+#### Developed By
 
 * Aruna Tennakoon
  * [paypal.me/arunat](http://paypal.me/arunat)
