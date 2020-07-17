@@ -2,15 +2,13 @@ Box
 =======
 
 
-### If you have [issues](https://github.com/kakopappa/arduino-esp8266-alexa-wemo-switch/issues/7#issuecomment-355533848) discovering please consider using Sinric Pro smart home skill. 
+### If you have [issues](https://github.com/kakopappa/arduino-esp8266-alexa-wemo-switch/issues/7#issuecomment-355533848) discovering please consider using Sinric Pro Smart Home Skill. 
 * [sinric.pro](https://sinric.pro) 
 
 I just wanted to build a cheap switch that can be controlled by Amazon Alexa by emulating a delkin device. 
 
 You can do this using WeMos D1-mini + Relay or use SonOff
-
-### If you have [issues](https://github.com/kakopappa/arduino-esp8266-alexa-wemo-switch/issues/7#issuecomment-355533848) discovering please consider using Sinric Pro smart home skill. 
-* [sinric.pro](https://sinric.pro) 
+ 
 
 #### Using WeMos D1-mini + Relay  
 
