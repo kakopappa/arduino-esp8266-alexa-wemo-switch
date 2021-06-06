@@ -30,7 +30,8 @@ To controlled this switch via Amazon Alexa.
 
 #### Do you want to turn on / off your TV, AirCon (AC) using Amazon Alexa? Checkout my latest project https://irdevkit.com/
 
-
+#### Looking for a Cheap DIY Alexa Light Bulb?
+https://github.com/kakopappa/ble-light-bulb
 
 ##Using Sonoff##
 
